@@ -1,0 +1,11 @@
+# makepkg build artifacts
+pkg/
+src/
+shell/
+*.pkg.tar
+*.pkg.tar.zst
+*.pkg.tar.xz
+*.log
+
+# pacman keys / signatures
+*.sig
