@@ -41,11 +41,12 @@ caelestia shell -k && caelestia shell -d
 ## Files
 
 - `PKGBUILD` — sources from the fork's `naxecode/oled-blackout` branch via git+https
-- The four patched QML files live in the fork repo, not here:
+- The patched QML files live in the fork repo, not here:
   - `modules/drawers/Drawers.qml` — iterate `Quickshell.screens` (not the filtered `Screens.screens`)
   - `modules/drawers/ContentWindow.qml` — gate `borderThickness` / `borderRounding` / `shadowOpacity` / `BlobInvertedRect.visible` on `oledBlackout`
   - `modules/drawers/Exclusions.qml` — gate `ExclusionZone.visible` on `oledBlackout`
   - `modules/bar/BarWrapper.qml` — `implicitWidth = 0` when `disabled`, regardless of `Config.border.thickness`
+  - `modules/areapicker/AreaPicker.qml` — iterate `Quickshell.screens` so SUPER+Z screenshot picker instantiates on blacked-out monitors
 
 ## Why a separate package name
 
