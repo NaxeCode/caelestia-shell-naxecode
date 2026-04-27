@@ -1,6 +1,6 @@
 # caelestia-shell-naxecode
 
-Arch Linux PKGBUILD that builds [NaxeCode/shell](https://github.com/NaxeCode/shell) — a personal fork of [caelestia-dots/shell](https://github.com/caelestia-dots/shell) with an OLED blackout mode for the Dell AW3225QF (DP-1).
+Arch Linux PKGBUILD that builds [NaxeCode/shell](https://github.com/NaxeCode/shell) — a personal fork of [caelestia-dots/shell](https://github.com/caelestia-dots/shell) with an OLED blackout mode for the Dell AW3225QF (DP-2).
 
 ## What it does
 
@@ -47,6 +47,9 @@ caelestia shell -k && caelestia shell -d
   - `modules/drawers/Exclusions.qml` — gate `ExclusionZone.visible` on `oledBlackout`
   - `modules/bar/BarWrapper.qml` — `implicitWidth = 0` when `disabled`, regardless of `Config.border.thickness`
   - `modules/areapicker/AreaPicker.qml` — iterate `Quickshell.screens` so SUPER+Z screenshot picker instantiates on blacked-out monitors
+  - `services/SysControl.qml` — singleton that polls `pp-data` JSON every 2s and watches `hyprland.conf` via FileView; exposes profile / monitor-mode / CPU / GPU / Govee state to the dashboard
+  - `modules/dashboard/SystemTab.qml` — new "System" dashboard tab: pp-* power-profile + mon-* layout segmented controls, per-monitor refresh-rate / VRR / HDR toggles (all driven dynamically from `Hypr.monitors.lastIpcObject`, no hardcoded connector names), telemetry tile, "Open pp-status" launcher
+  - `modules/dashboard/Content.qml` — registers the new System tab in `dashboardTabs`
 
 ## Why a separate package name
 

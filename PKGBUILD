@@ -1,5 +1,5 @@
 # Maintainer: NaxeCode <siraj.n.lee@gmail.com>
-# Personal fork of caelestia-shell with OLED blackout mode for AW3225QF (DP-1).
+# Personal fork of caelestia-shell with OLED blackout mode for AW3225QF (DP-2).
 # Reuses per-monitor `enabled:false` as a "render invisibly" flag — drawers
 # remain instantiated on the screen so the launcher can render there, but every
 # persistent paint surface (border, shadow, exclusion zones, bar left-stripe) is
@@ -8,7 +8,7 @@
 
 pkgname='caelestia-shell-naxecode'
 _upstream_pkgname='caelestia-shell'
-pkgver=1.6.1.r2.7862c8fb
+pkgver=1.6.1.r3.7b9879f8
 pkgrel=1
 pkgdesc='The desktop shell for the Caelestia dotfiles (NaxeCode fork — OLED blackout)'
 arch=('x86_64')
