@@ -8,7 +8,7 @@
 
 pkgname='caelestia-shell-naxecode'
 _upstream_pkgname='caelestia-shell'
-pkgver=2.3.0.r30.c3039bf1
+pkgver=2.3.0.r31.cd958b63
 pkgrel=1
 pkgdesc='The desktop shell for the Caelestia dotfiles (NaxeCode fork — OLED blackout)'
 arch=('x86_64')
