@@ -1,5 +1,5 @@
 # Maintainer: NaxeCode <siraj.n.lee@gmail.com>
-# Personal fork of caelestia-shell with OLED blackout mode for AW3225QF (DP-2).
+# Personal fork of caelestia-shell with OLED blackout mode for the AW3225QF.
 # Reuses per-monitor `enabled:false` as a "render invisibly" flag — drawers
 # remain instantiated on the screen so the launcher can render there, but every
 # persistent paint surface (border, shadow, exclusion zones, bar left-stripe) is
@@ -8,16 +8,16 @@
 
 pkgname='caelestia-shell-naxecode'
 _upstream_pkgname='caelestia-shell'
-pkgver=1.6.1.r16.908707d1
+pkgver=2.3.0.r30.c3039bf1
 pkgrel=1
 pkgdesc='The desktop shell for the Caelestia dotfiles (NaxeCode fork — OLED blackout)'
 arch=('x86_64')
 url='https://github.com/NaxeCode/shell'
 license=('GPL-3.0-only')
-depends=('caelestia-cli' 'quickshell-git' 'ddcutil' 'brightnessctl' 'app2unit' 'libcava' 'networkmanager'
+depends=('caelestia-cli' 'quickshell-git' 'ddcutil' 'brightnessctl' 'libcava' 'networkmanager'
          'lm_sensors' 'fish' 'aubio' 'libpipewire' 'glibc' 'gcc-libs' 'ttf-material-symbols-variable' 'power-profiles-daemon'
-         'ttf-rubik-vf' 'ttf-cascadia-code-nerd' 'swappy' 'libqalculate' 'bash' 'qt6-base' 'qt6-declarative')
-makedepends=('cmake' 'ninja' 'git')
+         'ttf-rubik-vf' 'ttf-cascadia-code-nerd' 'swappy' 'libqalculate' 'bash' 'qt6-base' 'qt6-declarative' 'qt6-imageformats')
+makedepends=('cmake' 'ninja' 'git' 'qt6-shadertools')
 provides=("$_upstream_pkgname=$pkgver")
 conflicts=("$_upstream_pkgname" "$_upstream_pkgname-git")
 source=("git+https://github.com/NaxeCode/shell.git#branch=naxecode/oled-blackout")
