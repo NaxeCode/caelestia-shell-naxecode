@@ -12,31 +12,41 @@ Reuses the per-monitor `enabled: false` flag in `~/.config/caelestia/monitors/<N
 
 Designed for an OLED panel that's physically connected and used by Hyprland for windows, but should accumulate zero burn-in time when not actively displaying content.
 
-## Install
+## Build and install
+
+Build against the complete intended Qt, Quickshell, shell-native-library and CLI
+stack in a resource-bounded clean environment. Do not use `makepkg -si` to pull
+new dependencies into an older active desktop.
 
 ```bash
 git clone https://github.com/NaxeCode/caelestia-shell-naxecode.git
 cd caelestia-shell-naxecode
-makepkg -si
+makepkg
 ```
 
-Conflicts with `caelestia-shell` and `caelestia-shell-git` from AUR — pacman will prompt to remove them. Provides `caelestia-shell` so dependent packages (e.g. `caelestia-cli`) remain satisfied.
+The September 2026 qualified rebuild retains source `34767588` and increments
+the package release to 3 for libcava 1.0.0/SONAME 1 and Caelestia CLI 1.1.2. It
+was exercised with Qt 6.11.2 and Quickshell `0.3.1.r10.g2d3b3e9`; it is not a
+QML-only replacement or permission to install one component independently.
+
+Conflicts with `caelestia-shell` and `caelestia-shell-git`; provides
+`caelestia-shell`. Review the exact replacement rather than using a wildcard
+package install.
 
 ## Upgrade workflow
 
-When upstream caelestia ships a new version:
+Review upstream changes against the actual retained capabilities before changing
+the fork. Do not automatically rebase and force-push the branch. Build the
+toolkit and native shell together against the intended complete dependency set;
+exercise real native consumers and preserve compatible previous packages/config.
 
-```bash
-cd ~/NaxeTools/shell                       # the fork clone
-git fetch upstream
-git rebase upstream/main                    # carry the OLED patches forward
-git push --force-with-lease origin naxecode/oled-blackout
-
-cd ~/NaxeTools/caelestia-shell-naxecode
-makepkg -f                                  # pkgver() auto-bumps from git describe
-sudo pacman -U *.pkg.tar.zst
-caelestia shell -k && caelestia shell -d
-```
+Install the selected package only as part of a reviewed coherent full transaction
+with independent recovery and an explicit maintenance window. `paru -Syu` does
+not rebuild this private package when Qt or libcava changes. The workstation
+owner documents its repository-specific full-update targets and boot constraints.
+Use the existing systemd shell owner for activation; do not kill and detach a
+second shell beneath active work. Native display, idle and input acceptance
+remains necessary after the restart.
 
 ## Files
 

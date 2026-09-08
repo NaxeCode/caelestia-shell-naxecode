@@ -9,12 +9,12 @@
 pkgname='caelestia-shell-naxecode'
 _upstream_pkgname='caelestia-shell'
 pkgver=2.3.0.r35.34767588
-pkgrel=1
+pkgrel=3
 pkgdesc='The desktop shell for the Caelestia dotfiles (NaxeCode fork — OLED blackout)'
 arch=('x86_64')
 url='https://github.com/NaxeCode/shell'
 license=('GPL-3.0-only')
-depends=('caelestia-cli' 'quickshell-git' 'ddcutil' 'brightnessctl' 'libcava' 'networkmanager'
+depends=('caelestia-cli>=1.1.2' 'quickshell-git' 'ddcutil' 'brightnessctl' 'libcava>=1.0.0' 'networkmanager'
          'lm_sensors' 'fish' 'aubio' 'libpipewire' 'glibc' 'gcc-libs' 'ttf-material-symbols-variable' 'power-profiles-daemon'
          'ttf-rubik-vf' 'ttf-cascadia-code-nerd' 'swappy' 'libqalculate' 'bash' 'qt6-base' 'qt6-declarative' 'qt6-imageformats')
 makedepends=('cmake' 'ninja' 'git' 'qt6-shadertools')
