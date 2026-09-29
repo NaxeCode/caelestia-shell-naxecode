@@ -1,6 +1,11 @@
 # caelestia-shell-naxecode
 
-Arch Linux PKGBUILD that builds [NaxeCode/shell](https://github.com/NaxeCode/shell) — a personal fork of [caelestia-dots/shell](https://github.com/caelestia-dots/shell) with an OLED blackout mode for the Dell AW3225QF (DP-2).
+Arch Linux PKGBUILD that builds [NaxeCode/shell](https://github.com/NaxeCode/shell), a personal fork of [caelestia-dots/shell](https://github.com/caelestia-dots/shell) with an OLED blackout mode for the Dell AW3225QF (DP-2).
+
+![status](https://img.shields.io/badge/status-active-a7c080?style=flat&labelColor=2d353b)
+![Arch Linux](https://img.shields.io/badge/Arch_Linux-7fbbb3?style=flat&labelColor=2d353b&logo=archlinux&logoColor=d3c6aa)
+![Hyprland](https://img.shields.io/badge/Hyprland-7fbbb3?style=flat&labelColor=2d353b&logo=hyprland&logoColor=d3c6aa)
+![Quickshell](https://img.shields.io/badge/Quickshell_%2F_QML-7fbbb3?style=flat&labelColor=2d353b&logo=qt&logoColor=d3c6aa)
 
 ## What it does
 
@@ -12,7 +17,30 @@ Reuses the per-monitor `enabled: false` flag in `~/.config/caelestia/monitors/<N
 
 Designed for an OLED panel that's physically connected and used by Hyprland for windows, but should accumulate zero burn-in time when not actively displaying content.
 
-## Build and install
+## How it works
+
+### Files
+
+- `PKGBUILD` — sources from the fork's `naxecode/oled-blackout` branch via git+https
+- The patched QML files live in the fork repo, not here:
+  - `modules/drawers/Drawers.qml` — iterate `Quickshell.screens` (not the filtered `Screens.screens`)
+  - `modules/drawers/ContentWindow.qml` — gate `borderThickness` / `borderRounding` / `shadowOpacity` / `BlobInvertedRect.visible` on `oledBlackout`
+  - `modules/drawers/Exclusions.qml` — gate `ExclusionZone.visible` on `oledBlackout`
+  - `modules/bar/BarWrapper.qml` — `implicitWidth = 0` when `disabled`, regardless of `Config.border.thickness`
+  - `modules/areapicker/AreaPicker.qml` — iterate `Quickshell.screens` so SUPER+Z screenshot picker instantiates on blacked-out monitors
+  - `services/SysControl.qml` — singleton that polls `pp-data` JSON every 2s and watches `hyprland.conf` via FileView; exposes profile / monitor-mode / CPU / GPU / Govee state to the dashboard
+  - `modules/dashboard/SystemTab.qml` — new "System" dashboard tab: pp-* power-profile + mon-* layout segmented controls, per-monitor refresh-rate / VRR / HDR toggles (all driven dynamically from `Hypr.monitors.lastIpcObject`, no hardcoded connector names), telemetry tile, "Open pp-status" launcher
+  - `modules/dashboard/Content.qml` — registers the new System tab in `dashboardTabs`
+
+### Why a separate package name
+
+The AUR ships `caelestia-shell` and `caelestia-shell-git`. Naming this fork `caelestia-shell-naxecode` with `provides=(caelestia-shell)` and `conflicts=(caelestia-shell caelestia-shell-git)` means:
+
+- `paru -Syu` won't try to overwrite our patches with the AUR build
+- Anything depending on `caelestia-shell` (e.g. `caelestia-cli`) still resolves cleanly
+- Easy to switch back to upstream by `paru -S caelestia-shell` (which removes our package via the conflict)
+
+## Getting started
 
 Build against the complete intended Qt, Quickshell, shell-native-library and CLI
 stack in a resource-bounded clean environment. Do not use `makepkg -si` to pull
@@ -33,7 +61,7 @@ Conflicts with `caelestia-shell` and `caelestia-shell-git`; provides
 `caelestia-shell`. Review the exact replacement rather than using a wildcard
 package install.
 
-## Upgrade workflow
+### Upgrade workflow
 
 Review upstream changes against the actual retained capabilities before changing
 the fork. Do not automatically rebase and force-push the branch. Build the
@@ -48,23 +76,9 @@ Use the existing systemd shell owner for activation; do not kill and detach a
 second shell beneath active work. Native display, idle and input acceptance
 remains necessary after the restart.
 
-## Files
+## Status
 
-- `PKGBUILD` — sources from the fork's `naxecode/oled-blackout` branch via git+https
-- The patched QML files live in the fork repo, not here:
-  - `modules/drawers/Drawers.qml` — iterate `Quickshell.screens` (not the filtered `Screens.screens`)
-  - `modules/drawers/ContentWindow.qml` — gate `borderThickness` / `borderRounding` / `shadowOpacity` / `BlobInvertedRect.visible` on `oledBlackout`
-  - `modules/drawers/Exclusions.qml` — gate `ExclusionZone.visible` on `oledBlackout`
-  - `modules/bar/BarWrapper.qml` — `implicitWidth = 0` when `disabled`, regardless of `Config.border.thickness`
-  - `modules/areapicker/AreaPicker.qml` — iterate `Quickshell.screens` so SUPER+Z screenshot picker instantiates on blacked-out monitors
-  - `services/SysControl.qml` — singleton that polls `pp-data` JSON every 2s and watches `hyprland.conf` via FileView; exposes profile / monitor-mode / CPU / GPU / Govee state to the dashboard
-  - `modules/dashboard/SystemTab.qml` — new "System" dashboard tab: pp-* power-profile + mon-* layout segmented controls, per-monitor refresh-rate / VRR / HDR toggles (all driven dynamically from `Hypr.monitors.lastIpcObject`, no hardcoded connector names), telemetry tile, "Open pp-status" launcher
-  - `modules/dashboard/Content.qml` — registers the new System tab in `dashboardTabs`
+In daily use on one Hyprland workstation. Package release 3 tracks fork commit `34767588` (35 commits on top of upstream v2.3.0). Not published to the AUR.
 
-## Why a separate package name
-
-The AUR ships `caelestia-shell` and `caelestia-shell-git`. Naming this fork `caelestia-shell-naxecode` with `provides=(caelestia-shell)` and `conflicts=(caelestia-shell caelestia-shell-git)` means:
-
-- `paru -Syu` won't try to overwrite our patches with the AUR build
-- Anything depending on `caelestia-shell` (e.g. `caelestia-cli`) still resolves cleanly
-- Easy to switch back to upstream by `paru -S caelestia-shell` (which removes our package via the conflict)
+---
+<sub>Built by [Aladdin Ali](https://github.com/NaxeCode) · [naxecode.github.io](https://naxecode.github.io)</sub>
