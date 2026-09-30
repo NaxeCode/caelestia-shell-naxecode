@@ -1,3 +1,5 @@
+<img src=".github/brand/logo.svg" width="80" alt="" />
+
 # caelestia-shell-naxecode
 
 Arch Linux PKGBUILD that builds [NaxeCode/shell](https://github.com/NaxeCode/shell), a personal fork of [caelestia-dots/shell](https://github.com/caelestia-dots/shell) with an OLED blackout mode for the Dell AW3225QF (DP-2).
@@ -87,6 +89,10 @@ recipes are separate from the full-stack recipe above.
 ## Status
 
 In daily use on one Hyprland workstation. Package release 3 tracks fork commit `34767588` (35 commits on top of upstream v2.3.0). Not published to the AUR.
+
+## License
+
+MIT. See [LICENSE](LICENSE).
 
 ---
 <sub>Built by [Aladdin Ali](https://github.com/NaxeCode) · [naxecode.github.io](https://naxecode.github.io)</sub>
