@@ -80,7 +80,9 @@ remains necessary after the restart.
 
 The [September 30 System dashboard recipe](maintenance/2026-09-30-system-dashboard/README.md)
 records the pp-status integration and its checks against the currently installed
-host stack. It is separate from the full-stack recipe above.
+host stack. The [desktop scale update](maintenance/2026-09-30-desktop-scale/README.md)
+adds the existing accessibility scale ladder to the Displays view. These dated
+recipes are separate from the full-stack recipe above.
 
 ## Status
 

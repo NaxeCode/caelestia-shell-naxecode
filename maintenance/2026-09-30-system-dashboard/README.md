@@ -2,7 +2,10 @@
 
 Source: `fc2226fa` (dashboard redesign `245b0073`, slider wiring `fc2226fa`).
 Package: `caelestia-shell-naxecode 2.3.0.r41.fc2226fa-1`.
-Status: built and verified; installation/activation pending the maintenance choice.
+Status: installed and activated on September 30, 2026, at 03:05 Eastern after
+Aladdin explicitly requested the restart. The independent acceptance receipt
+passed: service stable, IPC ready, dashboard opened, monitor modes/scales
+unchanged, and 426 packaged files with zero alterations.
 
 This dated recipe targets the currently installed Qt 6.11.1, Quickshell
 0.3.0.r3.g7d1c9a9, libcava 0.10.7 and Caelestia CLI 1.0.8 stack. It does not
