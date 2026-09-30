@@ -28,8 +28,8 @@ Designed for an OLED panel that's physically connected and used by Hyprland for 
   - `modules/drawers/Exclusions.qml` — gate `ExclusionZone.visible` on `oledBlackout`
   - `modules/bar/BarWrapper.qml` — `implicitWidth = 0` when `disabled`, regardless of `Config.border.thickness`
   - `modules/areapicker/AreaPicker.qml` — iterate `Quickshell.screens` so SUPER+Z screenshot picker instantiates on blacked-out monitors
-  - `services/SysControl.qml` — singleton that polls `pp-data` JSON every 2s and watches `hyprland.conf` via FileView; exposes profile / monitor-mode / CPU / GPU / Govee state to the dashboard
-  - `modules/dashboard/SystemTab.qml` — new "System" dashboard tab: pp-* power-profile + mon-* layout segmented controls, per-monitor refresh-rate / VRR / HDR toggles (all driven dynamically from `Hypr.monitors.lastIpcObject`, no hardcoded connector names), telemetry tile, "Open pp-status" launcher
+  - `services/SysControl.qml` — singleton that reads schema-v2 `pp-status --json` every 2s while the System tab is open; preserves unknown readings, reports stale data and watches monitor configuration
+  - `modules/dashboard/SystemTab.qml` — bounded "System" dashboard with Power & room and Displays views, expandable sensor readings, responsive monitor controls and a terminal view
   - `modules/dashboard/Content.qml` — registers the new System tab in `dashboardTabs`
 
 ### Why a separate package name
@@ -75,6 +75,12 @@ owner documents its repository-specific full-update targets and boot constraints
 Use the existing systemd shell owner for activation; do not kill and detach a
 second shell beneath active work. Native display, idle and input acceptance
 remains necessary after the restart.
+
+## Current-stack System dashboard
+
+The [September 30 System dashboard recipe](maintenance/2026-09-30-system-dashboard/README.md)
+records the pp-status integration and its checks against the currently installed
+host stack. It is separate from the full-stack recipe above.
 
 ## Status
 
